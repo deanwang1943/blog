@@ -1,12 +1,16 @@
-#改造renren开源项目
+# 改造renren开源项目
+
 1.日期处理
 
 在实体对象中日期类型
+
 ```java
 @JsonFormat(pattern = "yyyy-MM-dd")
 private Date startDate;
 ```
+
 日期控件
+
 ```html
 <el-date-picker
       v-model="endDate"
@@ -15,19 +19,25 @@ private Date startDate;
       placeholder="选择日期">
 </el-date-picker>
 ```
+
 2.引入element-ui的元素
+
 ```html项目
 <!-- 引入样式 -->
 <link rel="stylesheet" href="../../plugins/element-ui/lib/theme-chalk/index.css">
 <!-- 引入组件库 -->
 <script src="../../plugins/element-ui/lib/index.js"></script>
 ```
+
 3.修改HTML中grid的属性
-```js
+
+```javascript
   {label: 'supplierId', name: 'supplierId', index: 'supplier_id', width: 50, key: true, hidden: true},
 ```
+
 4.配置格式化
-```js
+
+```javascript
 {
                 label: '状态',
                 name: 'status',
@@ -47,8 +57,10 @@ private Date startDate;
                 }
             },
 ```
+
 5.动态加载参数
-```js
+
+```javascript
 getInfo: function (productId) {
             $.get(baseURL + "drp/product/info/" + productId, function (r) {
                 vm.product = r.product;
@@ -70,7 +82,9 @@ getInfo: function (productId) {
             });
         }
 ```
+
 6.下拉菜单
+
 ```html
 <el-select v-model="supplierIdValue" clearable placeholder="请选择">
                         <el-option
@@ -81,6 +95,7 @@ getInfo: function (productId) {
                         </el-option>
                     </el-select>
 ```
+
 ```java
 public class Option {
     private int value;
@@ -108,11 +123,15 @@ public class Option {
     }
 }
 ```
+
 7.TextArea控件
+
 ```html
 <el-input type="textarea" v-model="catalog.remark"></el-input>
 ```
+
 8.数字控件
+
 ```html
 <el-input-number v-model="quantity" @change="handleChange" :min="1" label="数量"></el-input-number>
 ```
