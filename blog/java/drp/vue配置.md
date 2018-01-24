@@ -98,19 +98,19 @@ getInfo: function (productId) {
 
 ```java
 public class Option {
-    private int value;
+    private Long value;
     private String label;
 
-    public Option(int value, String label) {
+    public Option(Long value, String label) {
         this.label = label;
         this.value = value;
     }
 
-    public int getValue() {
+    public Long getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(Long value) {
         this.value = value;
     }
 
