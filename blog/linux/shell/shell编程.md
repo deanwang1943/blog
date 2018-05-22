@@ -50,6 +50,20 @@ IP=`ifconfig`
 - $?:表示上一个命令执行的结果0为成功，1为失败
 - $$ 和 $!都是获取脚本进程号PID
 
+```shell
+#!/bin/sh
+
+for TOKEN in "$*"
+do
+   echo $TOKEN
+done
+
+for token in "$@"
+do
+   echo $token
+done
+```
+
 #### 3.变量数值计算
 
 shell也有很多的运算符如下：
