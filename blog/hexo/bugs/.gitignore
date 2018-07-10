@@ -5,3 +5,4 @@ db.json
 node_modules/
 public/
 .deploy*/
+id_rsa
