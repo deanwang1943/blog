@@ -1,5 +1,7 @@
 ---
 title: Shell编程
+tags: [Linux,Shell]
+categories: [Linux]
 ---
 
 * * *
@@ -146,4 +148,3 @@ ls path #命令并未输出太多每个文件的相关信息 -l参数会产生�
 echo "xxxx" > path/file.log #重新创建，存在则删除
 echo "xxxx" >> path/file.log #不存在则创建，存在则追加到尾部
 ```
-
