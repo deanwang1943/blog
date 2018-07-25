@@ -78,6 +78,8 @@ categories:
 
   RUN mkdir -p /opt/spark/logs
 
+  COPY init.sh /
+
   EXPOSE 22
   ```
   >将jdk的tar.gz存放与路经base/jdk.tar.gz
@@ -102,8 +104,6 @@ categories:
   FROM dean1943/ubuntu-base
 
   MAINTAINER dean<wangjingxin1986@gmail.com>
-
-  COPY init.sh /
 
   ENV SPARK_MASTER_PORT 7077
   ENV SPARK_MASTER_WEBUI_PORT 8080
@@ -130,14 +130,12 @@ categories:
 
   MAINTAINER dean<wangjingxin1986@gmail.com>
 
-  COPY init.sh /
-
   ENV SPARK_MASTER_WEBUI_PORT 8081
   ENV SPARK_MASTER_LOG /opt/spark/logs
   ENV SPARK_MASTER "spark://spark-master:7077"
 
   EXPOSE 8081
-  CMD ["/bin/bash","/init.sh"]
+
   CMD ["/usr/sbin/sshd", "-D"]
   ```
 
@@ -251,6 +249,15 @@ categories:
 
   ```
 
+3. init.sh
+  ```Shell
+  echo "172.17.0.2	spark-master" >> /etc/hosts
+  echo "172.17.0.3	spark-worker1" >> /etc/hosts
+  echo "172.17.0.4	spark-worker2" >> /etc/hosts
+
+  /bin/bash /etc/init.d/ssh start
+  ```
+
 ### 构建命令
 
 1. 启动命令
@@ -267,4 +274,8 @@ categories:
 
   sudo docker exec -it spark-master /bin/bash /init.sh
   sudo docker exec -it spark-master /bin/bash /opt/spark/sbin/start-all.sh
+  ```
+2. 停止命令
+  ```Shell
+  sudo docker stop spark-master spark-worker1 spark-worker2
   ```
