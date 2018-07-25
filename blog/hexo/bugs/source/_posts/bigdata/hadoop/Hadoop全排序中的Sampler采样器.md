@@ -1,3 +1,13 @@
+---
+title: Hadoop全排序中的Sampler采样器
+date: 2018-07-11 08:36:03
+tags:
+  - hadoop
+  - 大数据
+categories:
+  - 大数据
+---
+
 # Hadoop全排序中的Sampler采样器
 
 我们已经了解过Partitioner组件的其中一个和全排序相关的实现类----TotalOrderPartitioner。
