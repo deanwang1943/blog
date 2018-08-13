@@ -11,6 +11,6 @@ sudo docker run -it  -v /home/dean/Documents/blog/blog/hexo/bugs:/bugs dean/bugs
 
 
 
-sudo docker run -it -p 4000:4000 -v /home/dean/Documents/blog/blog/hexo/bugs:/bugs dean/bugs:v1 hexo s
-sudo docker exec -it d4975793ab43 sh
+sudo docker run --name dean-hexo -it -p 4000:4000 -v /home/dean/Documents/blog/blog/hexo/bugs:/bugs dean/bugs:v1 hexo s
+sudo docker exec -it e8ba42f47231 sh
 sh run.sh

@@ -152,3 +152,31 @@ airflow有很多个版本的，包含不同数据库的。
 > http://ip:5555  #flower位celery的监控
 
 ### airflow实例
+
+1. 测试一个dag中一个task
+
+  ```shell
+  #Test a task instance. This will run a task without checking for dependencies or recording it’s state in the database.
+  airflow test [-h] [-sd SUBDIR] [-dr] [-tp TASK_PARAMS]
+             dag_id task_id execution_date
+  airflow test dag_id task_id 2018-08-08
+  ```
+
+2. 特定运行一个dag
+
+  ```shell
+  #Run subsections of a DAG for a specified date range
+  airflow backfill [-h] [-t TASK_REGEX] [-s START_DATE] [-e END_DATE] [-m] [-l]
+                 [-x] [-a] [-i] [-I] [-sd SUBDIR] [--pool POOL]
+                 [--delay_on_limit DELAY_ON_LIMIT] [-dr]
+                 dag_id
+  airflow backfill dag_id
+  ```
+3. Run a single task instance
+
+  ```shell
+  airflow run [-h] [-sd SUBDIR] [-m] [-f] [--pool POOL] [--cfg_path CFG_PATH]
+            [-l] [-A] [-i] [-I] [--ship_dag] [-p PICKLE]
+            dag_id task_id execution_date
+  airflow run dag_id task_id 2018-08-08
+  ```

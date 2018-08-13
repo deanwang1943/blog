@@ -9,4 +9,4 @@ git config --global user.name "deanwang1943"
 hexo clean
 hexo g
 
-echo 'wjx123' | hexo d
+hexo d

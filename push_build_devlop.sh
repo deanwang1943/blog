@@ -3,12 +3,14 @@
 # git commit and push
 COMMIT_MSG=$1
 
-git commit -m "${COMMIT_MSG}"
+git commit -am "${COMMIT_MSG}"
 
 git push origin master
 
-sudo docker start dean-hexo
+echo wjx123 | sudo -S docker start dean-hexo | wjx123
+ 
+echo wjx123 | sudo -S docker exec -it dean-hexo hexo clean && hexo g
 
-sudo docker exec -it dean-hexo hexo clean && hexo g
+echo wjx123 | sudo -S docker exec -it dean-hexo hexo d
 
-sudo docker exec -it dean-hexo hexo d
+echo wjx123 | sudo -S docker stop dean-hexo
