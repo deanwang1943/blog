@@ -1,3 +1,10 @@
+---
+title: Java-基础-容器-hashmap分析
+date: 2018-08-22 16:36:03
+tags: [java]
+categories: [java]
+---
+
 HashMap? ConcurrentHashMap? 相信看完这篇没人能难住你！
 
 ### 前言
