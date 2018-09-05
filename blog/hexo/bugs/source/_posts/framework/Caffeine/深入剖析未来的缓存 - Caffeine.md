@@ -1,3 +1,10 @@
+---
+title: 深入剖析未来的缓存 - Caffeine
+date: 2018-09-05 13:36:03
+tags: [缓存,Caffeine]
+categories: [缓存]
+---
+
 > 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 https://juejin.im/post/5b8df63c6fb9a019e04ebaf4?utm_source=gold_browser_extension
 
 # 1\. 前言
