@@ -13,8 +13,6 @@ categories: [java]
 
 昨天一位知识星球的小伙伴面试的时候被问到：Spring AOP 中 JDK 和 CGLib 动态代理哪个效率更高？在知识星球整理了一下，今天特分享出来，供大家参考！对知识星球有兴趣的可以了解一下：
 
-![](https://user-gold-cdn.xitu.io/2018/9/10/165c0ef2a90db0dd?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
-
 ## **二、基本概念**
 
 首先，我们知道 Spring AOP 的底层实现有两种方式：一种是 JDK 动态代理，另一种是 CGLib 的方式。
@@ -174,11 +172,5 @@ Spring AOP 中的 JDK 和 CGLib 动态代理关于这个知识点很重要，关
 </section>
 
 </section>
-
-</section>
-
-<section>
-
-![](https://user-gold-cdn.xitu.io/2018/9/10/165c0ef5eca72dc9?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 
 </section>
