@@ -45,23 +45,23 @@ Map 这样的 `Key Value` 在软件开发中是非常经典的结构，常用�
     public HashMap() {
         this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);
     }
-```
+
 
 public HashMap(int initialCapacity, float loadFactor) {
-if (initialCapacity < 0)
-throw new IllegalArgumentException(“Illegal initial capacity: “ +
-initialCapacity);
-if (initialCapacity> MAXIMUM_CAPACITY)
-initialCapacity = MAXIMUM_CAPACITY;
-if (loadFactor <= 0 || Float.isNaN(loadFactor))
-throw new IllegalArgumentException(“Illegal load factor: “ +
-loadFactor);
+    if (initialCapacity < 0)
+        throw new IllegalArgumentException(“Illegal initial capacity: “ +
+    initialCapacity);
+    if (initialCapacity> MAXIMUM_CAPACITY)
+        initialCapacity = MAXIMUM_CAPACITY;
+    if (loadFactor <= 0 || Float.isNaN(loadFactor))
+        throw new IllegalArgumentException(“Illegal load factor: “ +
+            loadFactor);
 
-this.loadFactor = loadFactor;
-threshold = initialCapacity;
-init();
+    this.loadFactor = loadFactor;
+    threshold = initialCapacity;
+    init();
 }
-
+```
 给定的默认容量为 16，负载因子为 0.75。Map 在使用过程中不断的往里面存放数据，当数量达到了 `16 * 0.75 = 12` 就需要将当前 16 的容量进行扩容，而扩容这个过程涉及到 rehash、复制数据等操作，所以非常消耗性能。
 
 因此通常建议能提前预估 HashMap 的大小最好，尽量的减少扩容带来的性能损耗。
@@ -103,12 +103,12 @@ Entry 是 HashMap 中的一个内部类，从他的成员变量很容易看出�
                 return oldValue;
             }
         }
-```
 
-modCount++;
-addEntry(hash, key, value, i);
-return null;
+      modCount++;
+      addEntry(hash, key, value, i);
+      return null;
 }
+```
 
 *   判断当前数组是否需要初始化。
 *   如果 key 为空，则 put 一个空值进去。
@@ -124,17 +124,17 @@ return null;
             hash = (null != key) ? hash(key) : 0;
             bucketIndex = indexFor(hash, table.length);
         }
-```
 
-createEntry(hash, key, value, bucketIndex);
+
+      createEntry(hash, key, value, bucketIndex);
 }
 
 void createEntry(int hash, K key, V value, int bucketIndex) {
-Entry<K,V> e = table[bucketIndex];
-table[bucketIndex] = new Entry<>(hash, key, value, e);
-size++;
+      Entry<K,V> e = table[bucketIndex];
+      table[bucketIndex] = new Entry<>(hash, key, value, e);
+      size++;
 }
-
+```
 当调用 addEntry 写入 Entry 时需要判断是否需要扩容。
 
 如果需要就进行两倍扩充，并将当前的 key 重新 hash 并定位。
@@ -150,28 +150,26 @@ size++;
         if (key == null)
             return getForNullKey();
         Entry<K,V> entry = getEntry(key);
-```
 
-return null == entry ? null : entry.getValue();
+        return null == entry ? null : entry.getValue();
 }
 
 final Entry<K,V> getEntry(Object key) {
-if (size == 0) {
-return null;
-}
+    if (size == 0) {
+        return null;
+    }
 
-int hash = (key == null) ? 0 : hash(key);
-for (Entry<K,V> e = table[indexFor(hash, table.length)];
-e != null;
-e = e.next) {
-Object k;
-if (e.hash == hash &&
-((k = e.key) == key || (key != null && key.equals(k))))
-return e;
+    int hash = (key == null) ? 0 : hash(key);
+    for (Entry<K,V> e = table[indexFor(hash, table.length)];
+    e != null; e = e.next) {
+      Object k;
+      if (e.hash == hash &&
+      ((k = e.key) == key || (key != null && key.equals(k))))
+          return e;
+    }
+    return null;
 }
-return null;
-}
-
+```
 *   首先也是根据 key 计算出 hashcode，然后定位到具体的桶中。
 *   判断该位置是否为链表。
 *   不是链表就根据 `key、key 的 hashcode` 是否相等来返回值。
@@ -195,8 +193,8 @@ return null;
 先来看看几个核心的成员变量：
 
 ```
-    static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; // aka 16
-```
+static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; // aka 16
+
 
 /**
 * The maximum capacity, used if a higher value is implicitly specified
@@ -224,7 +222,7 @@ transient Set<Map.Entry<K,V>> entrySet;
 * The number of key-value mappings contained in this map.
 */
 transient int size;
-
+```
 和 1.7 大体上都差不多，还是有几个重要的区别：
 
 *   `TREEIFY_THRESHOLD` 用于判断是否需要将链表转换为红黑树的阈值。
@@ -257,28 +255,28 @@ Node 的核心组成其实也是和 1.7 中的 HashEntry 一样，存放的都�
         Node<K,V> e;
         return (e = getNode(hash(key), key)) == null ? null : e.value;
     }
-```
+
 
 final Node<K,V> getNode(int hash, Object key) {
-Node<K,V>[] tab; Node<K,V> first, e; int n; K k;
-if ((tab = table) != null && (n = tab.length) > 0 &&
-(first = tab[(n – 1) & hash]) != null) {
-if (first.hash == hash && // always check first node
-((k = first.key) == key || (key != null && key.equals(k))))
-return first;
-if ((e = first.next) != null) {
-if (first instanceof TreeNode)
-return ((TreeNode<K,V>)first).getTreeNode(hash, key);
-do {
-if (e.hash == hash &&
-((k = e.key) == key || (key != null && key.equals(k))))
-return e;
-} while ((e = e.next) != null);
-}
-}
+    Node<K,V>[] tab; Node<K,V> first, e; int n; K k;
+    if ((tab = table) != null && (n = tab.length) > 0 &&
+    (first = tab[(n – 1) & hash]) != null) {
+        if (first.hash == hash && // always check first node
+        ((k = first.key) == key || (key != null && key.equals(k))))
+            return first;
+        if ((e = first.next) != null) {
+            if (first instanceof TreeNode)
+                return ((TreeNode<K,V>)first).getTreeNode(hash, key);
+            do {
+                if (e.hash == hash &&
+                ((k = e.key) == key || (key != null && key.equals(k))))
+                return e;
+            } while ((e = e.next) != null);
+        }
+    }
 return null;
 }
-
+```
 get 方法看起来就要简单许多了。
 
 *   首先将 key hash 之后取得所定位的桶。
@@ -323,15 +321,14 @@ Iterator<Map.Entry<String, Integer>> entryIterator = map.entrySet().iterator
             Map.Entry<String, Integer> next = entryIterator.next();
             System.out.println("key=" + next.getKey() + " value=" + next.getValue());
         }
-```
+
 
 Iterator<String> iterator = map.keySet().iterator();
 while (iterator.hasNext()){
-String key = iterator.next();
-System.out.println(“key=” + key + ” value=” + map.get(key));
-
+    String key = iterator.next();
+    System.out.println(“key=” + key + ” value=” + map.get(key));
 }
-
+```
 `强烈建议`使用第一种 EntrySet 进行遍历。
 
 第一种可以把 key value 同时取出，第二种还得需要通过 key 取一次 value，效率较低。
@@ -361,11 +358,11 @@ ConcurrentHashMap 同样也分为 1.7 、1.8 版，两者在实现上略有不�
      * Segment 数组，存放数据时首先需要定位到具体的 Segment 中。
      */
     final Segment<K,V>[] segments;
+
+
+    transient Set<K> keySet;
+    transient Set<Map.Entry<K,V>> entrySet;
 ```
-
-transient Set<K> keySet;
-transient Set<Map.Entry<K,V>> entrySet;
-
 Segment 是 ConcurrentHashMap 的一个内部类，主要的组成如下：
 
 ```java
