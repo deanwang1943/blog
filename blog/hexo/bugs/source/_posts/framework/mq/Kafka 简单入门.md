@@ -115,7 +115,7 @@ public class Producer extends Thread {
         }
     }
 }
-复制代码
+ 
 ```
 
 ### consumer:
@@ -150,7 +150,7 @@ public class Consumer extends Thread {
         }
     }
 }
-复制代码
+ 
 ```
 
 ### properties:
@@ -168,7 +168,7 @@ public class KafkaProperties {
 
     private KafkaProperties() {}
 }
-复制代码
+ 
 ```
 
 # 相关名词：

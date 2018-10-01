@@ -26,7 +26,7 @@ public static void main(String[] args) {
                 .build();
         cache.put("hello","hello");
     }
-复制代码
+ 
 ```
 
 # 2.Caffeine 原理简介
@@ -183,7 +183,7 @@ Caffeine 提供了 refreshAfterWrite() 方法来让我们进行写后多久更�
 drainKeyReferences();
 //处理value引用
 drainValueReferences();
-复制代码
+ 
 ```
 
 具体的处理的代码有:
@@ -222,7 +222,7 @@ Cache<String, String> cache = Caffeine.newBuilder()
                     System.out.println(cause);
                 }))
                 .build();
-复制代码
+ 
 ```
 
 在 Caffeine 中被淘汰的原因有很多种:

@@ -97,7 +97,7 @@ npm install --save-dev validate-commit-msg
   "subjectPatternErrorMsg": "subject does not match subject pattern!",
   "helpMessage": "",
   "autoFix": false
-}复制代码
+} 
 3.使用方式二：写入 package.json
 
 {
@@ -106,7 +106,7 @@ npm install --save-dev validate-commit-msg
       /* your config here */
     }
   }
-}复制代码
+} 
 4.可是我们如果想自动使用 ghooks 钩子函数呢？
 
 {
