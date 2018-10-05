@@ -246,7 +246,7 @@ $ docker images --filter "dangling=true"
 
 # 删除所有无用的镜像
 $ docker rmi $(docker images -q -f dangling=true)
-复制代码
+ 
 ```
 
 ## Dockfile
@@ -857,7 +857,7 @@ ADD . /code
 WORKDIR /code
 RUN pip install -r requirements.txt
 CMD ["python", "app.py"]
-复制代码
+ 
 ```
 
 值得注意的是，我们在代码中直接使用服务名作为连接地址，即可访问到 Redis 数据库：
@@ -982,7 +982,7 @@ services:
         delay: 10s
       restart_policy:
         condition: on-failure
-复制代码
+ 
 ```
 
 # Further Reading

@@ -29,7 +29,7 @@ if __name__ == '__main__':
     inner_func()
 
   >> 10
-复制代码
+ 
 ```
 
 在这里 a 作为 outer 的局部变量，一般情况下会在函数结束的时候释放为 a 分配到的内存。但是在闭包中，如果外函数在结束的时候发现有自己的临时变量将来会在内部函数中用到，就把这个临时变量绑定给了内部函数，然后自己再结束。[1]
@@ -44,7 +44,7 @@ inner_func.__code__.co_freevars
 >> ('a',)
 inner_func.__code__.co_varnames
 >> ('b',)
-复制代码
+ 
 ```
 
 那么，既然外部函数会把内部变量要用到的变量 (即内部函数的自由变量) 绑定给内部函数，那么 a 的绑定在哪里？a 的绑定在返回函数的 inner 的__closure__属性中，其中的 cell_contents 保存着真正的值。[2]
@@ -52,7 +52,7 @@ inner_func.__code__.co_varnames
 ```
 inner_func.__closure__[0].cell_contents
 >> 10
-复制代码
+ 
 ```
 
 > 综上，闭包是一种函数，它会保留定义函数时存在的自由变量的绑定，这样调用函数时，虽然定义作用域不可用了，但是仍能使用那些绑定。[2]
@@ -78,7 +78,7 @@ if __name__ == '__main__':
     inner_func()
 
 >> UnboundLocalError: local variable 'a' referenced before assignment
-复制代码
+ 
 ```
 
 之所以会出现这个错误的关键在于：当 a 是数字或任何不可变类型时，a += 1 等价于 a = a+1，这会把 a 变为局部变量。对于不可变类型如数字，字符串，元组来说，**只能读取，不能更新**。在 a += 1 中，等价于于 a = a + 1，这里隐式创建了一个局部变量 a，这样 a 就不再是自由变量了，也不存在在闭包中了。
@@ -102,7 +102,7 @@ if __name__ == '__main__':
     inner_func()
 >> 10
    11
-复制代码
+ 
 ```
 
 BINGO!
@@ -143,7 +143,7 @@ def test_func(*args, **kwargs):
 if __name__ == '__main__':
     f = count_time(test_func)
     f(['hello', 'world'], hello=1, world=2)
-复制代码
+ 
 ```
 
 在这里 func 会绑定给 wrapper 函数，所以即使 count_time 函数结束了，其中传入的 func 也会绑定给 wrapper. 下述代码可验证之。
@@ -153,7 +153,7 @@ f.__code__.co_freevars
 >> ('func',)
 f.__closure__[0].cell_contents
 >> <function test_func at 0x0000014234165AE8>
-复制代码
+ 
 ```
 
 而上述的代码就是 python 装饰器的原理，只不过在我们可以使用 `@`语法糖简化代码。
@@ -178,7 +178,7 @@ if __name__ == '__main__':
 >> 函数 test_func 的运行时间为 1.9999
     参数为:(['hello', 'world'],){'hello': 1, 'world': 2}
 
-复制代码
+ 
 ```
 
 一个函数同样也可以被多个装饰器装饰，其原理于单个装饰器相同。重要的是理解装饰器实际上的调用顺序。
@@ -216,7 +216,7 @@ if __name__ == '__main__':
     函数参数为(['hello', 'world'],){'hello': 1, 'world': 2}
     test_func
     函数 wrapper_in_show_args 运行时间 0.000025
-复制代码
+ 
 ```
 
 先忽视 @count_time 装饰器，假如只有 @show_args 装饰器。 那么，装饰器背后其实是这样的:
@@ -229,7 +229,7 @@ f(...)
 f = show_args(test func)
 g = count_time(f)
 g(...)
-复制代码
+ 
 ```
 
 我们可以打印下 f,g 看下返回的是什么。
@@ -239,7 +239,7 @@ f.__name__
 >> wrapper_in_show_args
 g.__name__
 >> wrapper_in_count_time
-复制代码
+ 
 ```
 
 所以整个函数的运行流程是： 首先调用了 show_args，show_args 打印了'show_args_func', 之后返回 wrapper_in_show_args。接着调用 count_time, 并把 wrapper_in_show_args 传给了 count_time，首先打印'count_time_func', 之后返回 wrapper_in_count_time. 最后用户调用 wrapper_in_count_time 函数，并传入了相关参数。在 wrapper_in_count_time 函数里，首先调用了 func 函数，这里的 func 是一个自由变量，即之前传入的 wrapper_in_show_args, 所以打印函数参数。在 wrapper_in_show_args 里，调用了 func(), 这里的 func 又是之前传入的 test_func，所以打印'test_func'。最后打印函数运行时间，整个调用过程结束。
@@ -267,7 +267,7 @@ if __name__ == '__main__':
 >> 初始化装饰器
     (['hello', 'world'],) {'hello': 1, 'world': 2}
     中止装饰器
-复制代码
+ 
 ```
 
 ## 参考资料
