@@ -1,3 +1,13 @@
+---
+title: 深度剖析 Spark 分布式执行原理 - AIQ
+date: 2018-10-05 08:36:03
+tags:
+  - spark
+  - 大数据
+categories:
+  - 大数据
+---
+
 > 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 http://www.6aiq.com/article/1523271021117
 
 > 让代码分布式运行是所有分布式计算框架需要解决的最基本的问题。
@@ -239,7 +249,7 @@ task.run()
 
 ```
 
-反序列化的过程中能够通过 fileClassLoader 加载到所需的类，这样我们在执行就不会出错了，最终的执行结果为：run simple task!。到此为止，我们已经完整地模拟了代码分布式执行的过程。完整的示例代码，请参阅：[点击这里](http://www.6aiq.com/forward?goto=https%3A%2F%2Fgithub.com%2Fstanzhai%2Fjvm-exercise%2Ftree%2Fmaster%2Fsrc%2Fmain%2Fscala%2Fsite%2Fstanzhai%2Fexercise%2Fserialization) 
+反序列化的过程中能够通过 fileClassLoader 加载到所需的类，这样我们在执行就不会出错了，最终的执行结果为：run simple task!。到此为止，我们已经完整地模拟了代码分布式执行的过程。完整的示例代码，请参阅：[点击这里](http://www.6aiq.com/forward?goto=https%3A%2F%2Fgithub.com%2Fstanzhai%2Fjvm-exercise%2Ftree%2Fmaster%2Fsrc%2Fmain%2Fscala%2Fsite%2Fstanzhai%2Fexercise%2Fserialization)
 
 Spark 对 closure 序列化的处理
 我们依然通过一个示例，快速了解下 Scala 对闭包的处理，下面是从 Scala 的 REPL 中执行的代码：
@@ -576,5 +586,3 @@ Executor 启动时会判断是否为 REPL 模式，如果是的话会使用 Exec
 类比其他非 JVM 相关的语言，实现一个分布式计算框架，依然是需要解决序列化，动态加载执行代码的问题。
 
 （完）
-
-> 更多高质资源 尽在 AIQ 机器学习大数据 [知乎专栏 点击关注](https://zhuanlan.zhihu.com/52aiq)
