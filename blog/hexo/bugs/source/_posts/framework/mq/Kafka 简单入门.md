@@ -115,7 +115,7 @@ public class Producer extends Thread {
         }
     }
 }
- 
+
 ```
 
 ### consumer:
@@ -150,7 +150,7 @@ public class Consumer extends Thread {
         }
     }
 }
- 
+
 ```
 
 ### properties:
@@ -168,7 +168,7 @@ public class KafkaProperties {
 
     private KafkaProperties() {}
 }
- 
+
 ```
 
 # 相关名词：
@@ -197,8 +197,31 @@ public class KafkaProperties {
 
 ![](https://user-gold-cdn.xitu.io/2018/9/6/165ac37446702d4b?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 
-### 最后
+### Kafka的设计：
 
-小尾巴走一波，欢迎关注我的公众号，不定期分享编程、投资、生活方面的感悟:)
+1、吞吐量
+高吞吐是kafka需要实现的核心目标之一，为此kafka做了以下一些设计：
 
-![](https://user-gold-cdn.xitu.io/2018/9/6/165af209e9f177af?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+1. 数据磁盘持久化：消息不在内存中cache，直接写入到磁盘，充分利用磁盘的顺序读写性能
+2. zero-copy：减少IO操作步骤
+3. 数据批量发送
+4. 数据压缩
+5. Topic划分为多个partition，提高parallelism
+
+2、负载均衡
+1. producer根据用户指定的算法，将消息发送到指定的partition
+2. 存在多个partiiton，每个partition有自己的replica，每个replica分布在不同的Broker节点上
+3. 多个partition需要选取出lead partition，lead partition负责读写，并由zookeeper负责fail over
+4. 通过zookeeper管理broker与consumer的动态加入与离开
+
+3、拉取系统
+
+于kafka broker会持久化数据，broker没有内存压力，因此，consumer非常适合采取pull的方式消费数据，具有以下几点好处：
+
+1. 简化kafka设计
+2. consumer根据消费能力自主控制消息拉取速度
+3. consumer根据自身情况自主选择消费模式，例如批量，重复消费，从尾端开始消费等
+
+4、可扩展性
+
+当需要增加broker结点时，新增的broker会向zookeeper注册，而producer及consumer会根据注册在zookeeper上的watcher感知这些变化，并及时作出调整。
