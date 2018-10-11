@@ -140,7 +140,3 @@ ZGC 利用指针的 64 位中的几位表示 Finalizable、Remapped、Marked1、
 ZGC 虽然目前还在 JDK 11 还在实验阶段，但由于算法与思想是一个非常大的提升，相信在未来不久会成为主流的 GC 收集器使用。
 
 * * *
-
-更多技术文章、精彩干货，请关注 博客：[zackku.com](https://link.juejin.im?target=http%3A%2F%2Fzackku.com) 微信公众号：Zack 说码
-
-![](https://user-gold-cdn.xitu.io/2018/9/27/16619e66b78a3d58?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
