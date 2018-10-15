@@ -1,5 +1,5 @@
 ---
-title: 搭建
+title: 搭建Hadoop之一
 date: 2018-07-11 08:36:03
 tags:
   - hadoop
@@ -7,12 +7,8 @@ tags:
 categories:
   - 大数据
 ---
-## 设置名称
-编辑`/etc/hosts`
 
-```
-172.17.0.2 master
-```
+## 设置相互访问的使用名称代替ip的配置
 
 编辑`/etc/hostname`
 
@@ -20,13 +16,20 @@ categories:
 master
 ```
 
-## ssh免密登录
+编辑`/etc/hosts`
+
+```
+172.17.0.2 master
+```
+
+## 多服务器之间ssh免密登录配置
 
 启动ssh服务`/etc/init.d/ssh start`
 
 设置ssh登录配置
 
 编辑 `/etc/ssh/sshd_config` 添加
+
 ```xml
 PermitRootLogin yes
 ```
@@ -36,7 +39,10 @@ PermitRootLogin yes
 `ssh-keygen -t rsa`
 
 回车完成密码创建
-`cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys`
-`ssh-copy-id root@slave1`
+
+```shell
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+ssh-copy-id root@slave1
+```
 
 > 使用passwd来重新设置密码
