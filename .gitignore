@@ -1,1 +1,7 @@
 
+blog/hexo/bugs/.deploy_git
+blog/hexo/bugs/node_modules
+blog/hexo/bugs/id_rsa
+blog/hexo/bugs/package-lock.json
+blog/hexo/bugs/yarn.lock
+blog/hexo/bugs/_config(copy).yml
