@@ -26,6 +26,8 @@ RDD属性
 4. 一个partitioner，即RDD分片函数，一种树基于哈希的hashPartitioner，另一个是基于范围RangePartitioner，只有是key-value的RDD，才会有partitioner。非key-value的partitioner的值是None。
 
 
+
+
 1. 数据倾斜
 
    数据倾斜就是我们在计算数据的时候，数据的分散度不够，导致大量的数据集中到了一台或者几台机器上计算，这些数据的计算速度远远低于平均计算速度，导致整个计算过程过慢。
