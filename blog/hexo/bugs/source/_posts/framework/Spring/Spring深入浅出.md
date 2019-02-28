@@ -278,3 +278,16 @@ protected void parseBeanDefinitions(Element root, BeanDefinitionParserDelegate d
 
 两种方式的读取和解析都存在较大的差异，所以采用不同的解析方法，如果根节点或者子节点采用默认命名空间的话，则调用 parseDefaultElement() 进行解析，否则调用 delegate.parseCustomElement() 方法进行自定义解析。
 
+> Bean 的解析过程已经全部完成了，下面做一个简要的总结。
+
+解析 BeanDefinition 的入口在 DefaultBeanDefinitionDocumentReader.parseBeanDefinitions() 。该方法会根据命令空间来判断标签是默认标签还是自定义标签，其中默认标签由 parseDefaultElement() 实现，自定义标签由 parseCustomElement() 实现。在默认标签解析中，会根据标签名称的不同进行 import 、alias 、bean 、beans 四大标签进行处理，其中 bean 标签的解析为核心，它由 processBeanDefinition() 方法实现。processBeanDefinition() 开始进入解析核心工作，分为三步：
+
+1. 解析默认标签：BeanDefinitionParserDelegate.parseBeanDefinitionElement()
+2. 解析默认标签下的自定义标签：BeanDefinitionParserDelegate.decorateBeanDefinitionIfRequired()
+3. 注册解析的 BeanDefinition：BeanDefinitionReaderUtils.registerBeanDefinition
+
+在默认标签解析过程中，核心工作由 parseBeanDefinitionElement() 方法实现，该方法会依次解析 Bean 标签的属性、各个子元素，解析完成后返回一个 GenericBeanDefinition 实例对象。
+
+注册过程也不是那么的高大上，就是利用一个 Map 的集合对象来存放，key 是 beanName，value 是 BeanDefinition。
+
+从 Bean 资源的定位，转换为 Document 对象，接着对其进行解析，最后注册到 IOC 容器中，都已经完美地完成了。现在 IOC 容器中已经建立了整个 Bean 的配置信息，这些 Bean 可以被检索、使用、维护，他们是控制反转的基础，是后面注入 Bean 的依赖。
