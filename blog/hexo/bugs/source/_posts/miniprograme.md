@@ -462,3 +462,54 @@ module.exports = {
   formatTime: formatTime
 }
 ```
+
+表单提交
+```
+js
+
+// 提交表单
+  formSubmit(e) {
+    let params = Object.assign({}, e.detail.value, {
+      cityId: this.data.cityId,
+      cityName: this.data.cityName,
+      countryId: this.data.countryId,
+      provinceId: this.data.provinceId,
+      countryName: this.data.countryName,
+      provinceName: this.data.provinceName
+    });
+    if (this.options._id) params._id = this.options._id;
+    app.store.cloudApi.updateAddress(params).then(r => {
+      if (r.code === 0) {
+        wx.navigateBack({
+          delta: 1
+        })
+      }
+    })
+    
+wsml
+
+<form bindsubmit="formSubmit">
+    <view class='upt-item'>
+      <input class='upt-unit' name="name" placeholder="姓名" value="{{defaultInfo.name}}"/>
+    </view>
+    <view class='upt-item'>
+      <input class='upt-unit' name="phone" placeholder="手机号码" value="{{defaultInfo.phone}}"/>
+    </view>
+    <view class='upt-item'>
+      <input class='upt-unit' name="area" placeholder="省份、城市、区县" value="{{defaultInfo.area}}" disabled bindtap="showModal"/>
+    </view>
+    <view class='upt-item'>
+      <input class='upt-unit' name="address" placeholder="详细地址，如楼道、楼盘号等" value="{{defaultInfo.address}}"/>
+    </view>
+    <!-- <view class='upt-item'>
+      <radio-group class='upt-unit upt-default' name="radio-group">
+        <label>
+          <radio value="1"/>设为默认地址
+        </label>
+      </radio-group>
+    </view> -->
+    <view class='upt-btn'>
+      <button formType="submit">保存</button>
+    </view>
+  </form>
+```
