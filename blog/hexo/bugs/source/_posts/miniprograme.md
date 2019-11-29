@@ -11,6 +11,7 @@
 2. 云函数编写
 
 通过event来拿到对应的数据
+```
 (event, context, cb) => event.x + event.y
 
 exports.main = async (event, context) => {
@@ -40,13 +41,13 @@ exports.main = async (event, context) => {
   } catch(e) {
     
   }
-  
+ ``` 
 }
 
 上传云函数
 
 3. 调用云函数
-
+```
 wx.cloud.callFunction({
   name: '云函数名字',
   data: {
@@ -60,7 +61,7 @@ wx.cloud.callFunction({
   
   }
 })
-
+```
 4. 云函数服务
 
 添加服务逻辑部分，将返回结果放入结果中返回小程序
@@ -72,6 +73,7 @@ wx.cloud.callFunction({
 6. 云数据库
 
 创建云数据库后初始化数据库，在小程序端
+```
 const db = wx.cloud.database({});
 const book = db.collection('book');//连接book的数据库
 
@@ -84,8 +86,9 @@ db.collection('books').add({
 }).catch(err => {
   console.error(err)
 })
-
+```
 查询结果显示
+```
 const db = wx.cloud.database({})
 const cont = db.collection('books')
 
@@ -112,9 +115,10 @@ wxml:
 <view wx:for="book_list">
 {{item.price}}
 </view>
+```
 
 7. 列表到详情跳转
-
+```
 wxml:
 <van-button data-id="{{item.id}}" bind:click="detail">
   
@@ -129,3 +133,4 @@ detail: function(event) {
 
 onLoad里面
 console.log(options.id)
+```
