@@ -513,3 +513,74 @@ wsml
     </view>
   </form>
 ```
+
+新增topic
+```
+js
+
+textInput: function textInput(e) {
+        // console.log(e)
+        this.setData({
+            text: e.detail.detail.value
+        });
+    },
+    addTopic: function addTopic() {
+        var d = new Date();
+        var data = {
+            topicName: this.data.text,
+            userId: wx.getStorageSync("userId"),
+            topicUser: wx.getStorageSync("userName"),
+            topicUserImg: wx.getStorageSync("userImg"),
+            topicCommentNum: 0,
+            topicTime: d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
+            comment: [],
+            topicId: wx.getStorageSync("topicId")
+        };
+        if (data.topicName) {
+            db.collection("topic").add({
+                data: data,
+                success: function success(res) {
+                    wx.showToast({
+                        title: "发布成功"
+                    });
+                    setTimeout(function() {
+                        wx.switchTab({
+                            url: "../index/index"
+                        });
+                    }, 1e3);
+                },
+                fail: function fail(e) {
+                    wx.showToast({
+                        title: "发布错误"
+                    });
+                    // console.log(e)
+                                }
+            });
+        } else {
+            wx.showToast({
+                title: "请填写文字",
+                icon: "none"
+            });
+        }
+    },
+    getTopicId: function getTopicId() {
+        // var w = "abcdefghijklmnopqrstuvwxyz0123456789",
+        // firstW = w[parseInt(Math.random() * (w.length))];
+        var firstW = "topic";
+        var topicId = firstW + Date.now() + (Math.random() * 1e5).toFixed(0);
+        // console.log(topicId)
+                wx.setStorageSync("topicId", topicId);
+        return topicId;
+    }
+    
+ whml
+ 
+<view class="addTopic">
+    <view class="textAreaBox">
+        <l-textarea autoHeight="{{true}}" bind:linchange="textInput" border="{{flase}}" indicator="{{true}}" lClass="textArea" maxlength="140" placeholder="说说你的想法吧..."></l-textarea>
+    </view>
+    <view class="addTopicBtn">
+        <l-button bind:lintap="addTopic" shape="semicircle">发布</l-button>
+    </view>
+</view>
+```
