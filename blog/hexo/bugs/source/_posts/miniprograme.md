@@ -139,6 +139,8 @@ console.log(options.id)
 ## 实列代码
 
 首页js
+```
+var app = getApp();
 
 Page({
     data: {
@@ -246,3 +248,4 @@ Page({
         });
     }
 });
+```
