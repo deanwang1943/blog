@@ -1,12 +1,12 @@
 Dean Wang
 -----
-- **Basic**：`9 years work experience` | Male | 32(1986-09)  | married
+- **Basic**：`12 years work experience` | Male | 34(1986-09)  | married
 - **Mobile**：`18121057276`  **E-mail**： `wangjingxin1986@gmail.com` **Local**：Shanghai
 - **Company**：PwC   **Position**：Senior Technical Leader
 - **School**：ZhenJiangCollege School(05-09)  **Education**：College **Major**：Computer application
 
 #### Self evaluation
-1. 9 years of Java experience, 4 years of team management experience, 2 years of architecture experience, project management experience. Proficient in architecture and development based on Java programming language and related open source framework. Familiar with Web system development process, skilled use of Web related open source framework for project development, such as: Spring, hibernate, Mybatis and so on.
+1. 12 years of Java experience, 4 years of team management experience, 4 years of architecture experience, project management experience. Proficient in architecture and development based on Java programming language and related open source framework. Familiar with Web system development process, skilled use of Web related open source framework for project development, such as: Spring, hibernate, Mybatis and so on.
 2. pay close attention to the study of open source project and new technology and apply it to actual project development. It has good practical experience for a large number of data processing and high concurrent and high performance, and is familiar with middleware such as Redis, WebSphere MQ and so on.
 3. familiar with using Python and Scala scripting language programming, skilled use of Shell coding;familiar with tools SVN, GIT;
 4. familiar with the development of big data based on Hadoop and Spark open source framework.
@@ -17,12 +17,13 @@ Dean Wang
 - **Expected**：Internet/Software **Local**：Shanghai
 
 #### Work experience
-##### 2016-05 to Now：PwC 1000-5000人 `2y+1m` Senior technical Leader / ADT
+##### 2016-05 to Now：PwC 1000-5000人 `4y+2m` Senior technical Leader / ADT
 1. confirm the needs with customers and complete multiple designs and development according to the plan.
 2. undertake all code development and maintenance of core modules;
 3. lead the project team to guide the technology implementation and code review. And the successful completion of the project;
 4. design and develop Web products based on Java open source framework Spring, and participate in the coding of system architecture design, database structure design, business logic abstraction and so on.
 5. design and develop data service products based on Hadoop and Spark framework.
+6. design big data architecture base on AWS cloud for data laker and data pipeline
 
 ##### 2015-05 -- 2016-05：zhaogangwang 200-500人 `1y` application architect / Architecture Department
 1. development company supply chain financial project;
@@ -87,3 +88,6 @@ The main functions of this project are to develop project managers and participa
 
 #### Language ability
 - CET-4
+
+#### certification
+- AWS Big Data
